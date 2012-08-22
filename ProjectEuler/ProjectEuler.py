@@ -20,6 +20,12 @@ class Solution(object):
         self.timer = Tools.Timer()
         self.solution = 42
         
+    def problem_statement(self):
+        """
+        Grab the problem statement that for now is just the doc string.
+        """
+        return self.__doc__
+    
     def find_solution(self):
         """
         This method contains the guts of finding the solution.
@@ -29,6 +35,32 @@ class Solution(object):
         from time import sleep
         sleep(2)
         return 42
+        
+    def reset(self):
+        """
+        Use to reset an existing class.  In the case of a time_solution
+        call this can be used to clear our cached data on the object
+        """
+        pass
+    
+    def time_solution(self, loop_count = 10):
+        """
+        Use for optimization.  Run the solution multiple times
+        clearing the object cache each time to get an adequate
+        baseline for the time to create the solution.
+        """
+        loop_timer = Tools.Timer()
+        loop_timer.start_timer()
+        for count in range(0, loop_count):
+            self.reset()
+            self.solve()
+        loop_timer.stop_timer()
+        print self.results()
+        print """
+Ran the solution algorithm %d times at:
+Total Time (sec): %0.1f
+Seconds / Solve: %s
+""" % (loop_count, loop_timer.duration(), loop_timer.duration()/loop_count)
         
     def solve(self):
         """
@@ -50,7 +82,7 @@ class Solution(object):
 Solution of:
 %s
 
-Solution took %0.1f seconds
+Solution took %0.3f seconds
 
 What's next?
 

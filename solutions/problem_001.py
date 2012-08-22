@@ -20,21 +20,18 @@ path.append('%s/../ProjectEuler' % getcwd())
 
 import ProjectEuler
 
-PROBLEM_STATEMENT = """
-If we list all the natural numbers below 10 that are multiples 
-of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
-
-Find the sum of all the multiples of 3 or 5 below 1000.
-"""
-
-def find_multiples_up_to(factor, upper_limit):
+def find_multiples_up_to(factors, upper_limit):
     """
-    Given a factor and an upper limit, return a list of the
-    multiple of that factor up to and including the upper 
-    limit value.
+    Given a list of factors generate an array of multiples for those values. up
+    to and including the upper limit value.  Multiple factors will result in an
+    array that is the union of the individual sets.
+    @example:
+        call:    find_multiples_up_to([3,5], 15)
+        returns: array([3, 5, 6, 9, 10, 12, 15])
     
-    @param factor: The value to find multiples of
-    @type  factor: int
+    @param factors: list of factors to generate multiples from, if multiples
+                    provided, the returned array is a union of the individual sets
+    @type  factors: list
     
     @param upper_limit: The higest value to include in the list of multiples
     @type  upper_limit: int
@@ -42,11 +39,14 @@ def find_multiples_up_to(factor, upper_limit):
     @return: Array of multiples
     @rtype: numpy.ndarray
     """
-    from numpy import array
-    from math import floor
+    from numpy import array, arange, unique, concatenate
     
-    multiples = array(range(1, int(floor(upper_limit / factor) + 1)))
-    return multiples * factor
+    values = arange(1, upper_limit+1)
+    multiples = array([])
+    for factor in factors:
+        multiples = unique(concatenate([multiples, values[values % factor == 0]]))
+    
+    return multiples
 
 class Problem001(ProjectEuler.Solution):
     """
@@ -66,17 +66,11 @@ class Problem001(ProjectEuler.Solution):
         The timer starts just prior to calling this method
         and stops just after returning the solution's value.
         """
+        from numpy import sum as np_sum
         
-        # Should probably do something sleaker here, but this works
+        multiples = find_multiples_up_to([3, 5], 999)
         
-        m_of_3 = find_multiples_up_to(3, 1000-1)
-        m_of_5 = find_multiples_up_to(5, 1000-1)
-        
-        total = sum(m_of_3)
-        for multiple in m_of_5:
-            if multiple not in m_of_3:
-                total += multiple
-        return total
+        return np_sum(multiples)
 
 def main():
     """
@@ -86,8 +80,10 @@ def main():
     
     prob1.solve()
     
-    print PROBLEM_STATEMENT
+    print prob1.problem_statement()
     print prob1.results()
+    
+    
 
 if __name__ == "__main__":
     main()
