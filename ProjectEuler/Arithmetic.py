@@ -64,15 +64,19 @@ class Primes:
         # Starting to look for the factors.  Starting at 2
         # work up and pull out factors until the value is 1
         factors = array([])
+        working = value
         for prime in primes_list:
             # If the value is 1, we've got it all
-            if value == 1:
+            if working == 1:
                 break
-            while value % prime == 0:
+            while working % prime == 0:
                 # this prime is a factor of value so pull it out
                 factors = append(factors, [prime])
-                value = value / prime
-        return factors
+                working = working / prime
+        if len(factors) == 0:
+            return array([value])
+        else:
+            return factors
     
     def primes_up_to(self, value):
         """
