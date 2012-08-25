@@ -21,7 +21,7 @@ path.append('%s/../ProjectEuler' % getcwd())
 
 import ProjectEuler
 from Arithmetic import Primes
-from numpy import prod, unique, concatenate, array, sum, append
+from numpy import prod, array, sum, append
 
 class Problem005(ProjectEuler.Solution):
     """
@@ -60,7 +60,7 @@ class Problem005(ProjectEuler.Solution):
         #       of them so add one more.
         #       [ 2, 2, 2, 3, 5, 7 ]
         prime_seq = Primes()
-        for item in range(2,up_to + 1):
+        for item in range(2, up_to + 1):
             # Get the prime factorization for "item"
             primes_list = prime_seq.prime_factorization(item)
             for factor in primes_list:
