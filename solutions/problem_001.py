@@ -19,34 +19,7 @@ from os import getcwd
 path.append('%s/../ProjectEuler' % getcwd())
 
 import ProjectEuler
-
-def find_multiples_up_to(factors, upper_limit):
-    """
-    Given a list of factors generate an array of multiples for those values. up
-    to and including the upper limit value.  Multiple factors will result in an
-    array that is the union of the individual sets.
-    @example:
-        call:    find_multiples_up_to([3,5], 15)
-        returns: array([3, 5, 6, 9, 10, 12, 15])
-    
-    @param factors: list of factors to generate multiples from, if multiples
-                    provided, the returned array is a union of the individual sets
-    @type  factors: list
-    
-    @param upper_limit: The higest value to include in the list of multiples
-    @type  upper_limit: int
-    
-    @return: Array of multiples
-    @rtype: numpy.ndarray
-    """
-    from numpy import array, arange, unique, concatenate
-    
-    values = arange(1, upper_limit+1)
-    multiples = array([])
-    for factor in factors:
-        multiples = unique(concatenate([multiples, values[values % factor == 0]]))
-    
-    return multiples
+from Arithmetic import find_multiples_up_to
 
 class Problem001(ProjectEuler.Solution):
     """
