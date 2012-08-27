@@ -58,10 +58,10 @@ class Primes:
         @return: Array of prime factors
         @rtype: numpy.ndarray
         """
-        from numpy import append, array
+        from numpy import append, array, sqrt
         
         # Get a list of primes up to either 10000 or half the value
-        primes_list = self.primes_up_to(min(10000, value / 2))
+        primes_list = self.primes_up_to(min(10000, sqrt(value)))
         
         # Starting to look for the factors.  Starting at 2
         # work up and pull out factors until the value is 1
@@ -97,7 +97,7 @@ class Primes:
         @return: Array of prime factors
         @rtype: numpy.ndarray
         """
-        from numpy import arange, append
+        from numpy import arange, append, sqrt
         
         # We already know enough primes to give you what you want
         if value <= self.primes_through:
@@ -108,13 +108,14 @@ class Primes:
         # numbers will be stripped out in one of the following loops
         min_val = self.primes_through + 1
         values = arange(min_val, value+1)
+        check_up_to = sqrt(value)
         
         # if this instance already knows some primes use them first
         # to eliminate numbers from the values array that are 
         # composite numbers.
         for num in self.primes_list:
             # Only need to run through the lower half
-            if num > value / 2:
+            if num > check_up_to:
                 break
             # Strip out any multiples of 'num'
             bools = values % num == 0
@@ -127,13 +128,13 @@ class Primes:
         
         # If we don't know any primes yet or the primes we do know
         # don't cover the lower half of the desired value.
-        if len(self.primes_list) == 0 or (self.primes_list[-1] < value / 2):
+        if len(self.primes_list) == 0 or (self.primes_list[-1] < check_up_to):
             # Loop through starting at the last number check to the desired
             # values and start stripping out composite numbers from the 
             # values array
             for num in arange(self.primes_through + 1, value+1):
                 # Only need to run through the lower half
-                if num > value / 2:
+                if num > check_up_to:
                     break
                 # Strip out any multiples of 'num', making sure to keep
                 # 'num' since it's prime
