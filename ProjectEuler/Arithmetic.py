@@ -40,7 +40,9 @@ class Primes:
     The ever useful but difficult to predict prime number set.
     """
     def __init__(self):
-        pass
+        from numpy import array
+        self.primes_through = 1
+        self.primes_list = array([])
     
     def prime_factorization(self, value):
         """
@@ -56,7 +58,7 @@ class Primes:
         @return: Array of prime factors
         @rtype: numpy.ndarray
         """
-        from numpy import array, append
+        from numpy import append, array
         
         # Get a list of primes up to either 10000 or half the value
         primes_list = self.primes_up_to(min(10000, value / 2))
@@ -80,7 +82,10 @@ class Primes:
     
     def primes_up_to(self, value):
         """
-        Generate a list of primes up to the passed value
+        Generate a list of primes up to the passed value,
+        if the class instance already contains a list of 
+        primes, determine if we already know enough or need
+        to calculate more.
         
         @example:
             call:    primes_up_to(30)
@@ -92,22 +97,56 @@ class Primes:
         @return: Array of prime factors
         @rtype: numpy.ndarray
         """
-        from numpy import arange
+        from numpy import arange, append
         
-        # List the values from 2..value
-        values = arange(2, value+1)
-        bools = values % 1 != 0
-        # Loop through the numbers.  Cross off any 
-        # multiples as we go.  Anything left is a prime
-        for num in values:
+        # We already know enough primes to give you what you want
+        if value <= self.primes_through:
+            return self.primes_list[self.primes_list <= value]
+        
+        # Prime the values array with a list of numbers from the last
+        # value checked through to the desired value.  Any composite
+        # numbers will be stripped out in one of the following loops
+        min_val = self.primes_through + 1
+        values = arange(min_val, value+1)
+        
+        # if this instance already knows some primes use them first
+        # to eliminate numbers from the values array that are 
+        # composite numbers.
+        for num in self.primes_list:
             # Only need to run through the lower half
             if num > value / 2:
                 break
-            # If we've alredy marked it off as a multiple, skip
-            if bools[num-2]:
-                continue
-            # add in any multiples of num to the bool array
-            bools = bools | ((values % num == 0) & (values > num))
-        # return the non multiples
-        return values[bools == False]
+            # Strip out any multiples of 'num'
+            bools = values % num == 0
+            values = values[bools == False]
+            # All the values were composite, update the primes_through
+            # and return
+            if len(values) == 0:
+                self.primes_through = value
+                return self.primes_list
+        
+        # If we don't know any primes yet or the primes we do know
+        # don't cover the lower half of the desired value.
+        if len(self.primes_list) == 0 or (self.primes_list[-1] < value / 2):
+            # Loop through starting at the last number check to the desired
+            # values and start stripping out composite numbers from the 
+            # values array
+            for num in arange(self.primes_through + 1, value+1):
+                # Only need to run through the lower half
+                if num > value / 2:
+                    break
+                # Strip out any multiples of 'num', making sure to keep
+                # 'num' since it's prime
+                bools = (values % num == 0) & (values > num)
+                values = values[bools == False]
+                # All the values were composite, update the primes_through
+                # and return
+                if len(values) == 0:
+                    self.primes_through = value
+                    return self.primes_list
+        
+        # Update the class with the new information and return
+        self.primes_through = value
+        self.primes_list = append(self.primes_list, values)
+        return self.primes_list
 
