@@ -6,7 +6,40 @@ Collection of classes for various type of sequences.
 Author: Daniel Couture
 User: MathYourLife
 Date: Aug 19, 2012
+
+Last Updated: Aug 31, 2012
 """
+
+from numpy import array, arange, append
+from numpy import sqrt
+
+class PerfectSquares:
+    """
+    A perfect square is an integer multiplied by itself.
+    """
+    def __init__(self):
+        self.squares = array([1])
+    
+    def get_squares_up_to(self, value):
+        """
+        Retrieve perfect squares up to a value either off the
+        calculated values on the class or append to the class
+        array and reeturn when the value is reached.
+        """
+        
+        # We already know enough primes to give you what you want
+        if value <= self.squares[-1]:
+            return self.squares[self.squares <= value]
+        
+        # Get the range of roots that need to be appended
+        max_root = int(sqrt(value)) + 1
+        min_root = sqrt(self.squares[-1]) + 1
+        
+        # Calculate the perfect squares and append to the known list
+        roots = arange(min_root, max_root)
+        self.squares = append(self.squares, roots * roots)
+        
+        return self.squares
 
 class Fibonacci:
     """
