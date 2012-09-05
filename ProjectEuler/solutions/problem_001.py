@@ -37,7 +37,7 @@ class Problem001(Solution):
         
         multiples = find_multiples_up_to([3, 5], 999)
         
-        return np_sum(multiples)
+        return "%d" % np_sum(multiples)
 
 def main():
     """

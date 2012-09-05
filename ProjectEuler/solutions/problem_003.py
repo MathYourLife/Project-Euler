@@ -37,7 +37,7 @@ class Problem003(Solution):
         
         if not prod(factors) == value:
             print 'ERROR'
-        return factors[-1]
+        return "%d" % factors[-1]
         
 
 def main():
