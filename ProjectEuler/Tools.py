@@ -11,7 +11,7 @@ Date: Aug 19, 2012
 
 from time import time
 
-class Timer:
+class Timer(object):
     """
     Timer
     

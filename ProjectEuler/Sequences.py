@@ -13,7 +13,7 @@ Last Updated: Aug 31, 2012
 from numpy import array, arange, append
 from numpy import sqrt
 
-class PerfectSquares:
+class PerfectSquares(object):
     """
     A perfect square is an integer multiplied by itself.
     """
@@ -41,7 +41,7 @@ class PerfectSquares:
         
         return self.squares
 
-class Fibonacci:
+class Fibonacci(object):
     """
     A Fibonacci series class.  Provided with a starting condition
     it will propagate to the next value by finding the sum of the
@@ -78,7 +78,7 @@ class Fibonacci:
         self.current = next_value
         return next_value
 
-class Palindrome:
+class Palindrome(object):
     """
     Palindrome - Efficiently jumps from a palindrome to
     the next/previous.  The internal _seed property tracks

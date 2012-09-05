@@ -35,7 +35,7 @@ def find_multiples_up_to(factors, upper_limit):
     return multiples
 
 
-class Primes:
+class Primes(object):
     """
     The ever useful but difficult to predict prime number set.
     """
