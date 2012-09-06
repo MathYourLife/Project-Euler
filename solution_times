@@ -1,0 +1,81 @@
+Solution Times
+==============
+
+Problem 001
+-----------
+Summary:
+Find the sum of all the multiples of 3 or 5 below 1000.
+Speed:
+0.060 sec
+
+Problem 002
+-----------
+Summary:
+Sum of even Fibonacci numbers up to 4 million.
+Speed:
+0.000 sec
+
+Problem 003
+-----------
+Summary:
+Largest prime factor of 600851475143.
+Speed:
+0.008 sec
+
+Problem 004
+-----------
+Summary:
+Largest palindrome from 2 digit factors.
+Speed:
+0.024 sec
+
+Problem 005
+-----------
+Summary:
+LCM of 1 through 20
+Speed:
+0.002 sec
+
+Problem 006
+-----------
+Summary:
+square(sum) - sum(squares) for 1 through 100.
+Speed:
+0.000 sec
+
+Problem 007
+-----------
+Summary:
+Find the 10,001st prime number.
+Speed:
+0.093 sec
+
+Problem 008
+-----------
+Summary:
+Greatest product of a rolling 5-digit window.
+Speed:
+0.070 sec
+
+Problem 009
+-----------
+Summary:
+Pythagorean triple where a + b + c = 1000.
+Speed:
+0.053 sec
+
+Problem 010
+-----------
+Summary:
+Sum of all primes below 2 million.
+Speed:
+1.025 sec
+
+Problem 011
+-----------
+Summary:
+Greatest product in a number search grid.
+Speed:
+0.007 sec
+
+

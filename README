@@ -3,4 +3,15 @@ Project-Euler
 
 My Solutions to the Project Euler problems.  My goal is to generate a 
 solution on my own for each problem first, and continually optimize 
-until under the 1 minute limit.
+until under the 1 minute limit.  Classes are built with flexibilty for 
+general cases and efficiency as main goals.
+
+Usage
+-----
+Export path to PYTHONPATH
+export PYTHONPATH="$PYTHONPATH:/path/to/Project-Euler/"
+
+Run solutions via:
+python ProjectEuler/solutions/problem_001.py
+
+
