@@ -15,8 +15,8 @@ Date: Aug 25, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from Arithmetic import Primes
-from Sequences import Palindrome
+from ProjectEuler.Arithmetic import Primes
+from ProjectEuler.Sequences import Palindrome
 from numpy import array, append
 
 class Problem004(Solution):

@@ -14,7 +14,7 @@ Date: Aug 25, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from Arithmetic import Primes
+from ProjectEuler.Arithmetic import Primes
 
 class Problem007(Solution):
     """

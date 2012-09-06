@@ -18,7 +18,7 @@ Date: Sep 1, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from Sequences import PerfectSquares
+from ProjectEuler.Sequences import PerfectSquares
 
 class Problem009(Solution):
     """

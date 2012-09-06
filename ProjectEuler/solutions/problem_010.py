@@ -13,7 +13,7 @@ Date: Sep 1, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from Arithmetic import Primes
+from ProjectEuler.Arithmetic import Primes
 from numpy import sum
 
 class Problem010(Solution):

@@ -18,7 +18,7 @@ Date: Aug 19, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from Sequences import Fibonacci
+from ProjectEuler.Sequences import Fibonacci
 
 class Problem002(Solution):
     """
