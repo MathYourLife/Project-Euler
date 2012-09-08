@@ -18,7 +18,7 @@ Date: Sep 1, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Sequences import PerfectSquares
+from ProjectEuler.Sequence import PerfectSquares
 
 class Problem009(Solution):
     """
@@ -54,31 +54,31 @@ class Problem009(Solution):
         del psquares
         
         solved = False
-        # Initialize the outer 'a' loop
-        a = 1
-        while (not solved) & (a <= 995):
+        # Initialize the outer 'side_a' loop
+        side_a = 1
+        while (not solved) & (side_a <= 995):
             # Calculate the max c value for this a
             # c is maximized when b = a + 1
-            b = a +1
-            c = 1000 - (a + b)
+            side_b = side_a +1
+            side_c = 1000 - (side_a + side_b)
             # Start with b = a + 1 and c maximized.  Walk
             # b and c in towards each other until they meet
-            while (not solved) & (c > b):
+            while (not solved) & (side_c > side_b):
                 # Check for the Pythagorean triplet
-                if squares[a-1] + squares[b-1] == squares[c-1]:
+                if squares[side_a-1] + squares[side_b-1] == squares[side_c-1]:
                     # FOUND IT. Mark as solved and 
                     solved = True
                     break
                 # Decrement c and calculate the corresponding b
-                c -= 1
-                b = 1000 - (a + c)
+                side_c -= 1
+                side_b = 1000 - (side_a + side_c)
             
             if solved:
                 break
-            a += 1
+            side_a += 1
         
         # Return the solution the product abc
-        return "%d" % (a * b * c)
+        return "%d" % (side_a * side_b * side_c)
 
 def main():
     """

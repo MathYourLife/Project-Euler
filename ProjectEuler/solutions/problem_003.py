@@ -12,8 +12,8 @@ Date: Aug 24, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Arithmetic import Primes
-from numpy import prod
+from ProjectEuler import Arithmetic
+import numpy as np
 
 class Problem003(Solution):
     """
@@ -31,11 +31,10 @@ class Problem003(Solution):
         The timer starts just prior to calling this method
         and stops just after returning the solution's value.
         """
-        p_lib =  Primes()
         value = 600851475143
-        factors = p_lib.prime_factorization(value)
+        factors = Arithmetic.prime_factorization(value)
         
-        if not prod(factors) == value:
+        if not np.prod(factors) == value:
             print 'ERROR'
         return "%d" % factors[-1]
         

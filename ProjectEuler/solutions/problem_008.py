@@ -32,6 +32,7 @@ Date: Aug 27, 2012
 """
 
 from ProjectEuler.Problem import Solution
+import numpy as np
 
 class Problem008(Solution):
     """
@@ -93,11 +94,10 @@ class Problem008(Solution):
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 """
-        from numpy import array, prod
         
         # Read the string into a numpy integer array
         large_number = large_number.replace("\n", "")
-        large_list = array(list(large_number), int)
+        large_list = np.array(list(large_number), int)
         
         # Solution method:
         #  Keep track of the position in the string and
@@ -108,7 +108,7 @@ class Problem008(Solution):
         #  hit a zero, skip over that section.
         
         # Initialize the values for the loop
-        max_product = prod(large_list[0:5])
+        max_product = np.prod(large_list[0:5])
         current_product = max_product
         pos = 5
         while pos < len(large_list):
@@ -118,10 +118,10 @@ class Problem008(Solution):
             	# The next value is a zero so skip ahead
             	# until we see 5 nonzero values.
                 pos += 5
-                current_product = prod(large_list[pos - 4:pos + 1])
+                current_product = np.prod(large_list[pos - 4:pos + 1])
                 while current_product == 0:
                     pos += 1
-                    current_product = prod(large_list[pos - 4:pos + 1])
+                    current_product = np.prod(large_list[pos - 4:pos + 1])
                 
             else:
             	# Find the value being shifted off the trailing edge

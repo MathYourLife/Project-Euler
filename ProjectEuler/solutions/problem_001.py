@@ -14,6 +14,7 @@ Date: Aug 19, 2012
 
 from ProjectEuler.Arithmetic import find_multiples_up_to
 from ProjectEuler.Problem import Solution
+import numpy as np
 
 class Problem001(Solution):
     """
@@ -33,11 +34,10 @@ class Problem001(Solution):
         The timer starts just prior to calling this method
         and stops just after returning the solution's value.
         """
-        from numpy import sum as np_sum
         
         multiples = find_multiples_up_to([3, 5], 999)
         
-        return "%d" % np_sum(multiples)
+        return "%d" % np.sum(multiples)
 
 def main():
     """

@@ -14,7 +14,7 @@ Date: Aug 25, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Arithmetic import Primes
+from ProjectEuler import Arithmetic
 
 class Problem007(Solution):
     """
@@ -36,15 +36,13 @@ class Problem007(Solution):
         and stops just after returning the solution's value.
         """
         
-        p_inst = Primes()
-        
         up_to = 0
         delta = 5000
-        while len(p_inst.primes_list) < 10002:
+        while len(Arithmetic.PRIMES_LIST) < 10002:
             up_to += delta
-            p_inst.primes_up_to(up_to)
+            Arithmetic.primes_up_to(up_to)
         
-        return p_inst.primes_list[10000]
+        return Arithmetic.PRIMES_LIST[10000]
         
 
 def main():

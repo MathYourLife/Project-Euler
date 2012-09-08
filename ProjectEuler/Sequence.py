@@ -10,15 +10,16 @@ Date: Aug 19, 2012
 Last Updated: Aug 31, 2012
 """
 
-from numpy import array, arange, append
-from numpy import sqrt
+import numpy as np
 
 class PerfectSquares(object):
     """
     A perfect square is an integer multiplied by itself.
     """
     def __init__(self):
-        self.squares = array([1])
+        self.pos = None
+        self.value = None
+        self.squares = np.array([1])
     
     def get_squares_up_to(self, value):
         """
@@ -32,14 +33,42 @@ class PerfectSquares(object):
             return self.squares[self.squares <= value]
         
         # Get the range of roots that need to be appended
-        max_root = int(sqrt(value)) + 1
-        min_root = sqrt(self.squares[-1]) + 1
+        max_root = int(np.sqrt(value)) + 1
+        min_root = np.sqrt(self.squares[-1]) + 1
         
         # Calculate the perfect squares and append to the known list
-        roots = arange(min_root, max_root)
-        self.squares = append(self.squares, roots * roots)
+        roots = np.arange(min_root, max_root)
+        self.squares = np.append(self.squares, roots * roots)
         
         return self.squares
+    
+    def previous(self):
+        """
+        Move to the previous perfect square.
+        
+        @return: The previous perfect square
+        @rtype:  int
+        """
+        
+        if self.pos == None:
+            self.pos = 0
+        self.pos -= 1
+        self.value = self.pos * self.pos
+        return self.value
+        
+    def next(self):
+        """
+        Move to the next perfect square.
+        
+        @return: The next perfect square
+        @rtype:  int
+        """
+        
+        if self.pos == None:
+            self.pos = 0
+        self.pos += 1
+        self.value = self.pos * self.pos
+        return self.value
 
 class Fibonacci(object):
     """
@@ -56,27 +85,31 @@ class Fibonacci(object):
     
     def __init__(self, current = 1, previous = 0):
         self.current = current
-        self.previous = previous
+        self.__previous = previous
     
     def next(self):
         """
-        A Fibonacci series class.  Provided with a starting condition
-        it will propagate to the next value by finding the sum of the
-        previous two values.
+        Generate the next value in the sequence
         
-        @param current: The last value of the known sequence
-        @type  current: int
-        
-        @param previous: The previous value of the known sequence
-        @type  previous: int
-        
-        @return: The next value in the sequence by summing the last two
+        @return: The next value in the sequence by summing the previous two
         @rtype:  int
         """
-        next_value = self.current + self.previous
-        self.previous = self.current
+        next_value = self.current + self.__previous
+        self.__previous = self.current
         self.current = next_value
-        return next_value
+        return self.current
+    
+    def previous(self):
+        """
+        Generate the next value in the sequence
+        
+        @return: The next value in the sequence by summing the previous two
+        @rtype:  int
+        """
+        pre_value = self.current - self.__previous
+        self.current = self.__previous
+        self.__previous = pre_value
+        return self.current
 
 class Palindrome(object):
     """
@@ -203,3 +236,58 @@ class Palindrome(object):
             self.value = int(''.join(prefix_list) + ''.join(suffix_list))
         return self.value
 
+class TriangleNumbers(object):
+    """
+    Triangle Number Sequence
+    
+    The sequence is defined as the number of dots required to make
+    larger and larger triangles by adding a row with one more dot 
+    than the last row.
+    
+    1, 3, 6, 10, 15, 21, ...
+    """
+    def __init__(self):
+        self.pos = None
+        self.value = None
+    
+    def set_position(self, pos):
+        """
+        Set the position in the sequence for the class and
+        return the value of the Triangle number sequence at 
+        that position.
+        
+        @param: Set the position in the triangle sequence
+        @type:  int
+        
+        @return: The triangle value at that position in the sequence
+        @rtype:  int
+        """
+        self.pos = pos
+        self.value = (pos * (pos + 1)) / 2
+        return self.value
+    
+    def next(self):
+        """
+        Move to the next value in the triangle sequence.
+        
+        @return: The next triangle number
+        @rtype:  int
+        """
+        if self.pos == None:
+            self.pos = 0
+            self.value = 0
+        self.pos += 1
+        self.value += self.pos
+        return self.value
+    
+    def previous(self):
+        """
+        Move to the previous value in the triangle sequence.
+        
+        @return: The previous triangle number
+        @rtype:  int
+        """
+        self.value -= self.pos
+        self.pos -= 1
+        return self.value
+        

@@ -15,9 +15,9 @@ Date: Aug 25, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Arithmetic import Primes
-from ProjectEuler.Sequences import Palindrome
-from numpy import array, append
+from ProjectEuler import Arithmetic
+from ProjectEuler.Sequence import Palindrome
+import numpy as np
 
 class Problem004(Solution):
     """
@@ -45,19 +45,19 @@ class Problem004(Solution):
         p_value = 998899
         p_seq = Palindrome(p_value)
         
-        prime_seq = Primes()
-        primes_list = prime_seq.primes_up_to(1000)
+        p_list = Arithmetic.primes_up_to(1000)
+        
         while p_value >= 10000:
             p_value = p_seq.previous()
-            factors = array([])
+            factors = np.array([])
             value = p_value
-            for prime in primes_list:
+            for prime in p_list:
                 # If the value is 1, we've got it all
                 if value == 1:
                     break
                 while value % prime == 0:
                     # this prime is a factor of value so pull it out
-                    factors = append(factors, [prime])
+                    factors = np.append(factors, prime)
                     value = value / prime
             if value != 1:
                 # If the value is not 1 by now, a larger than 3 digit

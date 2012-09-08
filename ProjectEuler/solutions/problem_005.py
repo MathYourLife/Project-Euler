@@ -14,8 +14,8 @@ Date: Aug 25, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Arithmetic import Primes
-from numpy import prod, array, sum, append
+from ProjectEuler import Arithmetic
+import numpy as np
 
 class Problem005(Solution):
     """
@@ -40,7 +40,7 @@ class Problem005(Solution):
         #  What number to we want to include up to.
         up_to = 20
         # Initialize the prime factors for the solution
-        factors = array([])
+        factors = np.array([])
         
         # Starting at 1 and going up to the up_to limit,
         # Calculate the prime factorization for each item
@@ -53,18 +53,18 @@ class Problem005(Solution):
         #       The factors array already has 2's but not three
         #       of them so add one more.
         #       [ 2, 2, 2, 3, 5, 7 ]
-        prime_seq = Primes()
+        
         for item in range(2, up_to + 1):
             # Get the prime factorization for "item"
-            primes_list = prime_seq.prime_factorization(item)
-            for factor in primes_list:
+            primes = Arithmetic.prime_factorization(item)
+            for factor in primes:
                 # if the factor is not present or there are not enough 
                 # of them append another one on
-                if sum(factors == factor) < sum(primes_list == factor):
-                    factors = append(factors, [factor])
+                if sum(factors == factor) < sum(primes == factor):
+                    factors = np.append(factors, factor)
         
         # Final answer is the product of the accumulated primes
-        return prod(factors)
+        return np.prod(factors)
         
 
 def main():

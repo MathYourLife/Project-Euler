@@ -13,8 +13,8 @@ Date: Sep 1, 2012
 """
 
 from ProjectEuler.Problem import Solution
-from ProjectEuler.Arithmetic import Primes
-from numpy import sum
+from ProjectEuler import Arithmetic
+import numpy as np
 
 class Problem010(Solution):
     """
@@ -35,16 +35,14 @@ class Problem010(Solution):
         and stops just after returning the solution's value.
         """
         
-        p_inst = Primes()
-        
         up_to = 0
         delta = 50000
         while up_to < 2000000:
             up_to += delta
-            p_inst.primes_up_to(up_to)
+            Arithmetic.primes_up_to(up_to)
         
-        p_list = p_inst.primes_up_to(2000000)
-        return "%d" % sum(p_list)
+        p_list = Arithmetic.primes_up_to(2000000)
+        return "%d" % np.sum(p_list)
 
 def main():
     """
